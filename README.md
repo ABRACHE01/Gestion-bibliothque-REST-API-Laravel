@@ -23,13 +23,13 @@ Framework requise: soit Laravel ou Lumen.
 
 ### User stories:
 
-En tant qu'utilisateur, je peux créer un compte en utilisant mon adresse e-mail et un mot de passe sécurisé.  
-En tant qu'utilisateur, je peux me connecter à mon compte existant en utilisant mon adresse e-mail et mon mot de passe.  
-En tant qu'utilisateur, je peux réinitialiser mon mot de passe en utilisant mon adresse e-mail associée à mon compte.  
-En tant qu'utilisateur, je peux modifier les informations de mon compte, telles que mon adresse e-mail et mon mot de passe, en tout temps.  
-En tant qu'un réceptionniste de la bibliothèque, je peux créer un produit en saisissant un titre, auteur du livre, collection, isbn, date de publication, nombre de pages, emplacement (l'emplacement physique du livre dans la bibliothèque), statut (statut actuel du livre, par exemple emprunté, disponible, entraitement, etc), un contenu et en associant des genres.  
-En tant qu'un réceptionniste, je peux éditer ou supprimer les livres existants.  
-En tant qu'utilisateur, je peux consulter la liste des livres disponibles, filter par genre et afficher les détails d'un livre en particulier.  
-En tant qu'administrateur, je peux éditer ou supprimer tous les livres et les genres.  
-En tant qu'administrateur, je peux créer, éditer et supprimer des genres.  
-En tant qu'administrateur, je peux éditer et supprimer des rôles utilisateur, et affecter des permissions d'accès à chaque rôle.  
+- En tant qu'utilisateur, je peux créer un compte en utilisant mon adresse e-mail et un mot de passe sécurisé.  
+- En tant qu'utilisateur, je peux me connecter à mon compte existant en utilisant mon adresse e-mail et mon mot de passe.  
+- En tant qu'utilisateur, je peux réinitialiser mon mot de passe en utilisant mon adresse e-mail associée à mon compte.  
+- En tant qu'utilisateur, je peux modifier les informations de mon compte, telles que mon adresse e-mail et mon mot de passe, en tout temps.  
+- En tant qu'un réceptionniste de la bibliothèque, je peux créer un produit en saisissant un titre, auteur du livre, collection, isbn, date de publication, nombre de pages, emplacement (l'emplacement physique du livre dans la bibliothèque), statut (statut actuel du livre, par exemple emprunté, disponible, entraitement, etc), un contenu et en associant des genres.  
+- En tant qu'un réceptionniste, je peux éditer ou supprimer les livres existants.  
+- En tant qu'utilisateur, je peux consulter la liste des livres disponibles, filter par genre et afficher les détails d'un livre en particulier.  
+- En tant qu'administrateur, je peux éditer ou supprimer tous les livres et les genres.  
+- En tant qu'administrateur, je peux créer, éditer et supprimer des genres.  
+- En tant qu'administrateur, je peux éditer et supprimer des rôles utilisateur, et affecter des permissions d'accès à chaque rôle.  
