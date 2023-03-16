@@ -92,17 +92,13 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function filterByCategory($category_id, $book_id)
+    public function filterByCategory($id )
     {
-        $category = Category::find($category_id);
-        $book = $category->books()->where('id', $book_id)->first();
-    
-        if (!$book) {
-            return response()->json(['message' => 'Book not found'], 404);
-        }
-    
+        $category = Category::find($id);
+        $books = $category->books;
+
         return response()->json([
-            'book' => $book,
+            'books' => $books,
         ]);
     }
 
