@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('categories', CategoryController::class); 
 Route::apiResource('books', BookController::class );
+
+ Route::get('category/filter/{category_id}/book/{book_id}', [CategoryController::class, 'filterByCategory']);

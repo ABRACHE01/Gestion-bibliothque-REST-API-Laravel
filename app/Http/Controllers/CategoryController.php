@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Book;
 
 
 class CategoryController extends Controller
@@ -89,4 +91,19 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully',
         ]);
     }
+
+    public function filterByCategory($category_id, $book_id)
+    {
+        $category = Category::find($category_id);
+        $book = $category->books()->where('id', $book_id)->first();
+    
+        if (!$book) {
+            return response()->json(['message' => 'Book not found'], 404);
+        }
+    
+        return response()->json([
+            'book' => $book,
+        ]);
+    }
+
 }
