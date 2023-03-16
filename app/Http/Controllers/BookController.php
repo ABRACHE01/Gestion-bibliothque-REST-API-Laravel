@@ -168,4 +168,12 @@ class BookController extends Controller
             'message' => 'Book not found',
         ], 404);
     }
+
+    // public function  search(Request $request){
+    //     $search = $request->search;
+    //     $book = Book::where('title', 'like', '%'.$search.'%')->get();
+    //     return response()->json([
+    //         'book' => $book,
+    //     ]);
+    // }
 }
