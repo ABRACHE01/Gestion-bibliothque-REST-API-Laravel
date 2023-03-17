@@ -14,31 +14,10 @@ use Carbon\Carbon;
 
 class AuthController extends Controller
 {
-   
-
-    
-    // public function register(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string',
-    //         'email' => 'required|string|email|unique:users',
-    //         'password' => 'required|string|confirmed'
-    //     ]);
-    //     $user = new User([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password),
-    //         'user_role' => 'client'
-    //     ]);
-
-    //     $user->save();
-        
-    //     return response()->json([
-    //         'message' => 'Successfully created user!'
-    //     ], 201);
-
-    // }
-
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['login', 'register']);
+    }
 
     public function register(Request $request)
     {
@@ -59,8 +38,6 @@ class AuthController extends Controller
         ], 201);
 
     }
-
-
 
     public function login(Request $request)
     {
@@ -89,12 +66,12 @@ class AuthController extends Controller
 
     }
     
-
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
+
         return response()->json([
-            'message' => 'Successfully logged out'
+            'message' => 'Logged out successfully !'
         ]);
     }
 

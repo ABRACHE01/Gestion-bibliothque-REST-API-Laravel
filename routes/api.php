@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,27 +19,28 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
+
+
+//api routes:
 
 Route::apiResource('categories', CategoryController::class); 
 Route::apiResource('books', BookController::class );
-
-
 Route::get('categories/filter/{category_id}', [CategoryController::class, 'filterByCategory']);
 
 
 //authentication Routes:
-// Route::controller(AuthController::class)->group(function () {
-//     Route::post('login', 'login');
-//     Route::post('register', 'register');
 
-//     Route::post('logout', 'logout')->middleware('auth:sanctum');
-// });
+Route::controller(AuthController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout');
+});
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user', [UserController::class, 'index']);
+    Route::put('user/updatePassword',[UserController::class,'updatePassword']);
+    Route::put('user/updateName',[UserController::class,'updateName']);
+    Route::put('user/updateEmail',[UserController::class,'updateEmail']);
+});
 
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/register', [AuthController::class, 'register']);

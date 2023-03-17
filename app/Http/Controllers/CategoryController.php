@@ -10,6 +10,15 @@ use App\Models\Book;
 
 class CategoryController extends Controller
 {
+
+
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'filterByCategory']);
+    }
+
     /**
      * Display a listing of the resource.
      *
