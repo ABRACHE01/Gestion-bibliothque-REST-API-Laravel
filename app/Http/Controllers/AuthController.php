@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 use Carbon\Carbon;
 
 
@@ -21,22 +22,22 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-     
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_role' => 'client',
             'phone' => $request->phone
         ]);
-
+    
         $user->save();
-        
+    
+        $role = Role::findByName('client');
+        $user->assignRole($role);
+
         return response()->json([
-            'message' => 'User registered successfully !',
+            'message' => 'User registered successfully!',
             'user' => $user
         ], 201);
-
     }
 
     public function login(Request $request)

@@ -13,61 +13,56 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('role:librarian')->except(['index', 'show']);
+        $this->middleware('role:admin')->only(['create', 'edit', 'delete']);
     }
-
     public function index()
     {
-        return response()->json([
-            'user' => Auth::user()
-        ], 200);
+
+       $users=User::with('roles')->get();
+
+         return response()->json([
+            'message'=>'users found',
+            'users'=>$users,
+         ]);
+      
+
     }
 
-    public function updateEmail(Request $request)
+
+    public function show($id)
     {
-        $request->validate([
-            'email' => 'required|string|email|unique:users,email,' . $request->user()->id,
-        ]);
-
-        $request->user()->update([
-            'email' => $request->email,
-        ]);
+        $user=User::with('roles')->find($id);
 
         return response()->json([
-            'message' => 'Email updated successfully !',
-            'user' => $request->user()
-        ], 200);
+            'message'=>'user found',
+            'user'=>$user,
+       ]);
     }
 
-    public function updateName(Request $request)
+   // switch role to librarian
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $request->user()->update([
-            'name' => $request->name,
-        ]);
+        $user=User::find($id);
+        $user->syncRoles('librarian');
 
         return response()->json([
-            'message' => 'Name updated successfully !',
-            'user' => $request->user()
-        ], 200);
-    }
+            'message'=>'user updated',
+            'user'=>$user,
+       ]);
+    } 
 
-    public function updatePassword(Request $request)
+    public function destroy($id)
     {
-        $request->validate([
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $request->user()->update([
-            'password' => Hash::make($request->password),
-        ]);
+        $user=User::find($id);
+        $user->delete();
 
         return response()->json([
-            'message' => 'Password updated successfully !',
-            'user' => $request->user()
-        ], 200);
+            'message'=>'user deleted',
+            'user'=>$user,
+       ]);
     }
+
+
 }

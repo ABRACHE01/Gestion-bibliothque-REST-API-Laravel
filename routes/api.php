@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,8 @@ use App\Http\Controllers\UserController;
 Route::apiResource('categories', CategoryController::class); 
 Route::apiResource('books', BookController::class );
 Route::get('categories/filter/{category_id}', [CategoryController::class, 'filterByCategory']);
+Route::apiResource('clients', ClientController::class);
+Route::apiResource('users', UserController::class);
 
 
 //authentication Routes:
@@ -38,9 +42,10 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('user', [UserController::class, 'index']);
-    Route::put('user/updatePassword',[UserController::class,'updatePassword']);
-    Route::put('user/updateName',[UserController::class,'updateName']);
-    Route::put('user/updateEmail',[UserController::class,'updateEmail']);
+    
+    Route::get('profile', [ProfileController::class, 'index']);
+    Route::put('profile/updatePassword',[ProfileController::class,'updatePassword']);
+    Route::put('profile/updateName',[ProfileController::class,'updateName']);
+    Route::put('profile/updateEmail',[ProfileController::class,'updateEmail']);
 });
 

@@ -17,18 +17,7 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        // $categories = Category::all();
-        // $users = User::all();
-
-        // foreach ($categories as $category) {
-        //     foreach ($users as $user) {
-        //         Book::factory()->count(5)->create([
-        //             'category_id' => $category->id,
-        //             'user_id' => $user->id,
-        //         ]);
-        //     }
-        // }
-
+        
         Book::factory()->count(25)->create();
 
     }
