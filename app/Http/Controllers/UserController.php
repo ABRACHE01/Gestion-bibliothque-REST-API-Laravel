@@ -13,9 +13,12 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
-        $this->middleware('role:librarian')->except(['index', 'show']);
-        $this->middleware('role:admin')->only(['create', 'edit', 'delete']);
+        $this->middleware('auth:sanctum');
+        $this->middleware('role:librarian')->only(['index','show']);
+        $this->middleware('can:delete-user')->only(['destroy']);
+        $this->middleware('can:create-user')->only(['store']);
+        $this->middleware('can:update-user')->only(['update']);
+
     }
     public function index()
     {

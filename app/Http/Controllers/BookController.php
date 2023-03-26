@@ -11,8 +11,9 @@ class BookController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum')->except(['index', 'show']);
-        $this->middleware('role:librarian')->except(['index', 'show']);
-        $this->middleware('role:admin')->only(['create', 'edit', 'delete']);
+        $this->middleware('can:delete-book')->only(['destroy']);
+        $this->middleware('can:create-book')->only(['store']);
+        $this->middleware('can:update-book')->only(['update']);
     }
     /**
      * Display a listing of the resource.
