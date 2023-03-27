@@ -42,7 +42,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    
     Route::get('profile', [ProfileController::class, 'index']);
     Route::put('profile/updatePassword',[ProfileController::class,'updatePassword']);
     Route::put('profile/updateName',[ProfileController::class,'updateName']);

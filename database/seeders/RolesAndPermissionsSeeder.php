@@ -24,14 +24,18 @@ class RolesAndPermissionsSeeder extends Seeder
           Permission::create(['name' => 'delete-book']);
 
 
-               
-            Permission::create(['name' => 'switch-user']);
+
+            Permission::create(['name' => 'switch-client-to-librarian']);
             Permission::create(['name' => 'delete-user']);
+            Permission::create(['name' => 'create-user']);
+            Permission::create(['name' => 'all-users']);
+            Permission::create(['name' => 'show-user']);
 
             Permission::create(['name' => 'create-category']);
             Permission::create(['name' => 'delete-category']);
             Permission::create(['name' => 'edit-client']);
             Permission::create(['name' => 'delete-client']);
+          
 
 
           // Create roles
@@ -40,26 +44,31 @@ class RolesAndPermissionsSeeder extends Seeder
           $clientRole = Role::create(['name' => 'client']);
 
             // Assign permissions to roles
+
+            // admin assign permissions
             $adminRole->givePermissionTo('create-book');
             $adminRole->givePermissionTo('edit-book');
             $adminRole->givePermissionTo('delete-book');
-            $adminRole->givePermissionTo('switch-user');
             $adminRole->givePermissionTo('delete-user');
             $adminRole->givePermissionTo('create-category');
             $adminRole->givePermissionTo('delete-category');
             $adminRole->givePermissionTo('edit-client');
+            $adminRole->givePermissionTo('delete-client');
+            $adminRole->givePermissionTo('switch-client-to-librarian');
+            $adminRole->givePermissionTo('delete-user');
+            $adminRole->givePermissionTo('all-users');
+            $adminRole->givePermissionTo('show-user');
            
 
+            // librarian assign permissions
             $librarianRole->givePermissionTo('create-book');
             $librarianRole->givePermissionTo('edit-book');
             $librarianRole->givePermissionTo('delete-book');
-            $librarianRole->givePermissionTo('edit-client');
-            $librarianRole->givePermissionTo('delete-client');
             $librarianRole->givePermissionTo('create-category');
             $librarianRole->givePermissionTo('delete-category');
+            $librarianRole->givePermissionTo('all-users');
+            $librarianRole->givePermissionTo('show-user');
 
-    
 
-        
     }
 }

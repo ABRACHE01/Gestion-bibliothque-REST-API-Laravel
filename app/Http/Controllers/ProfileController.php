@@ -16,7 +16,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-
+        
         return response()->json([
             'message' => 'User data retrieved successfully !',
             'user' => Auth::user()

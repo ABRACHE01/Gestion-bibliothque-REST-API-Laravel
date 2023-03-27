@@ -14,10 +14,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('role:librarian')->only(['index','show']);
         $this->middleware('can:delete-user')->only(['destroy']);
-        $this->middleware('can:create-user')->only(['store']);
-        $this->middleware('can:update-user')->only(['update']);
+        $this->middleware('can:switch-client-to-librarian')->only(['update']);
+        $this->middleware('can:all-users')->only(['index']);
+        $this->middleware('can:show-user')->only(['show']);
+
 
     }
     public function index()
@@ -38,6 +39,12 @@ class UserController extends Controller
     {
         $user=User::with('roles')->find($id);
 
+        if(!$user){
+            return response()->json([
+                'message'=>'user not found',
+                'user'=>$user,
+           ]);
+        }
         return response()->json([
             'message'=>'user found',
             'user'=>$user,
@@ -66,6 +73,6 @@ class UserController extends Controller
             'user'=>$user,
        ]);
     }
-
+    
 
 }

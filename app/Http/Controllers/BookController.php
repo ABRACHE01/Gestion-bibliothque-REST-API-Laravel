@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -22,8 +23,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book=Book::all();
-        return response()->json([
+        $book=Book::with('category')->get();
+        return response()->json([ 
             'book' => $book,
         ]);
     }
@@ -44,7 +45,6 @@ class BookController extends Controller
             'published_date' => 'required',
             'page_count' => 'required',
             'language' => 'required',
-            'user_id' => 'required',
             'category_id' => 'required',
             'description' => 'required',
             'image' => 'required',
@@ -64,7 +64,7 @@ class BookController extends Controller
             'description' => $request->description,
             'page_count' => $request->page_count,
             'language' => $request->language,
-            'user_id' => 1,
+            'user_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'status' => $request->status,
             'image' => $image_name, 
@@ -177,11 +177,4 @@ class BookController extends Controller
         ], 404);
     }
 
-    // public function  search(Request $request){
-    //     $search = $request->search;
-    //     $book = Book::where('title', 'like', '%'.$search.'%')->get();
-    //     return response()->json([
-    //         'book' => $book,
-    //     ]);
-    // }
 }
