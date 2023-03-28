@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
+    
     public function sendResetLinkEmail(Request $request)
     {
         $request->validate(['email' => 'required|email']);

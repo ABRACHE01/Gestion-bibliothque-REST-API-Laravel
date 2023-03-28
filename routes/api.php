@@ -49,6 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('profile/updateName',[ProfileController::class,'updateName']);
     Route::put('profile/updateEmail',[ProfileController::class,'updateEmail']);
 });
+
+
 //Forgot-Reset password 
 Route::group(['controller' => ResetPasswordController::class], function (){
     // Request password reset link

@@ -14,7 +14,7 @@ class BookController extends Controller
         $this->middleware('auth:sanctum')->except(['index', 'show']);
         $this->middleware('can:delete-book')->only(['destroy']);
         $this->middleware('can:create-book')->only(['store']);
-        $this->middleware('can:update-book')->only(['update']);
+        $this->middleware('can:edit-book')->only(['update']);
     }
     /**
      * Display a listing of the resource.
@@ -23,10 +23,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book=Book::with('category')->get();
-        return response()->json([ 
-            'book' => $book,
-        ]);
+ 
     }
 
     /**
