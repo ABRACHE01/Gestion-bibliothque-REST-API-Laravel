@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +43,21 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    
     Route::get('profile', [ProfileController::class, 'index']);
     Route::put('profile/updatePassword',[ProfileController::class,'updatePassword']);
     Route::put('profile/updateName',[ProfileController::class,'updateName']);
     Route::put('profile/updateEmail',[ProfileController::class,'updateEmail']);
+});
+//Forgot-Reset password 
+Route::group(['controller' => ResetPasswordController::class], function (){
+    // Request password reset link
+    Route::post('forgot-password', 'sendResetLinkEmail')->name('password.email');
+    // Reset password
+    Route::post('reset-password', 'resetPassword')->middleware('guest')->name('password.update');
+
+    Route::get('reset-password/{token}', function (string $token) {
+         return $token;
+     })->middleware('guest')->name('password.reset');
 });
 
